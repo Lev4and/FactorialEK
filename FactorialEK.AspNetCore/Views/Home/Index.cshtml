@@ -1,8 +1,30 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@await Html.PartialAsync("HeroAreaWrapperPartial")
+@await Html.PartialAsync("ProductAreaWrapperPartial")
+@await Html.PartialAsync("OfferAreaWrapperPartial")
+@await Html.PartialAsync("FeaturedProductAreaWrapperPartial")
+@await Html.PartialAsync("NewsletterAreaWrapperPartial")
+@await Html.PartialAsync("BlogAreaWrapperPartial")
+@section ScriptPage
+{
+    <script>
+      jQuery(document).ready(function($) {
+      // Countdown JS
+        var now = new Date();
+        var day = now.getDate();
+        var month = now.getMonth() + 1;
+        var year = now.getFullYear() + 1;
+    
+        var nextyear = month + '/' + day + '/' + year + ' 07:07:07';
+    
+        $('.countdown-timer').countdown({
+          date: '4/12/2021 23:59:59', // TODO Date format: 07/27/2017 17:00:00
+          offset: +2, // TODO Your Timezone Offset
+          day: 'Day',
+          days: 'Days',
+          hideOnComplete: true
+        }, function (container) {
+          //alert('Done!');
+        });
+      });
+    </script>
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
