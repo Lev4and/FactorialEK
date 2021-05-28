@@ -1,11 +1,4 @@
-﻿using FactorialEK.AspNetCore.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace FactorialEK.AspNetCore.Controllers
 {
@@ -13,6 +6,15 @@ namespace FactorialEK.AspNetCore.Controllers
     {
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Администратор"))
+                {
+                    return Redirect("~/Admin/Home/Index/");
+                }
+            }
+
+            
             return View();
         }
     }
