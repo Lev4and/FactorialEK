@@ -35,7 +35,7 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
             }
             else
             {
-                var oldVersionEntity = GetCategoryPhotoManufacturingOrServiceByCategoryId(entity.Id);
+                var oldVersionEntity = GetCategoryPhotoManufacturingOrServiceByCategoryId(entity.CategoryManufacturingOrServiceId);
 
                 if (oldVersionEntity.CategoryManufacturingOrServiceId != entity.CategoryManufacturingOrServiceId)
                 {

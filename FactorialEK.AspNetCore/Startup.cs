@@ -36,6 +36,7 @@ namespace FactorialEK.AspNetCore
             services.AddTransient<IManufacturingOrServicesRepository, EFManufacturingOrServicesRepository>();
             services.AddTransient<INewsRepository, EFNewsRepository>();
             services.AddTransient<DataManager>();
+            services.AddTransient<UploadFileService>();
             services.AddDbContext<FactorialEKDbContext>((options) =>
             {
                 options.UseSqlServer(Config.ConnectionString);

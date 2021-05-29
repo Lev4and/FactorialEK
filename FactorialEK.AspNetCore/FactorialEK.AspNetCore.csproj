@@ -1423,5 +1423,8 @@
     <Folder Include="Views\Blog" />
     <Folder Include="Views\Product" />
     <Folder Include="Views\Shop" />
+    <Folder Include="wwwroot\images\upload\categories\" />
+    <Folder Include="wwwroot\images\upload\gallery\" />
+    <Folder Include="wwwroot\images\upload\manufacturing-or-services\" />
   </ItemGroup>
 </Project>
