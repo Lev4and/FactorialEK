@@ -96,6 +96,21 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
             }
         }
 
+        public IQueryable<CategoryManufacturingOrService> GetCategoriesManufacturingOrService(bool track = false)
+        {
+            if (track)
+            {
+                return _context.CategoriesManufacturingOrService
+                    .Include(category => category.Photo);
+            }
+            else
+            {
+                return _context.CategoriesManufacturingOrService
+                    .Include(category => category.Photo)
+                    .AsNoTracking();
+            }
+        }
+
         public IQueryable<CategoryManufacturingOrService> GetCategoriesManufacturingOrService(int itemsPerPage, int numberPage, bool track = false)
         {
             if (track)

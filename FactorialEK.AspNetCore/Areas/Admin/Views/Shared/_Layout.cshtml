@@ -7,27 +7,29 @@
     @await Html.PartialAsync("CssPartial")
     @if (IsSectionDefined("StylePage"))
     {
-        @await RenderSectionAsync("StylePage")
+	    @await RenderSectionAsync("StylePage");
     }
+    
+    <script src="~/js/adminpanel/pace.min.js"></script>
 </head>
-<body>
-<div class=" container-scroller">
-   @await Html.PartialAsync("NavBarPartial")
-   <div class="container-fluid">
-      <div class="row row-offcanvas row-offcanvas-right">
-         @await Html.PartialAsync("SideBarParial")
-         <div class="content-wrapper">
-               @RenderBody()
-         </div>
-         @await  Html.PartialAsync("FooterPartial")
-      </div>
-   </div>
-</div>
-@await Html.PartialAsync("ScriptsPartial")
-@if(IsSectionDefined("ScriptPage"))
-{
-    @await RenderSectionAsync("ScriptPage")
-}
+<body class="bg-theme bg-theme1">
+	<div class="wrapper">
+		@await Html.PartialAsync("SidebarPartial")
+		@await Html.PartialAsync("HeaderPartial")
+		@RenderBody()
+		@await Html.PartialAsync("OverlayPartial")
+		@await Html.PartialAsync("BackToTopButtonPartial")
+		@await Html.PartialAsync("FooterPartial")
+	</div>
+	@await Html.PartialAsync("SwitcherWrapperPartial")
+	@await Html.PartialAsync("ScriptsPartial")
+	@if (IsSectionDefined("ScriptPage"))
+	{
+		@await RenderSectionAsync("ScriptPage")
+	}
+	@if (IsSectionDefined("PerfectScrollbarInit"))
+	{
+		@await RenderSectionAsync("PerfectScrollbarInit")
+	}
 </body>
 </html>
-

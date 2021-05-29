@@ -1,0 +1,63 @@
+﻿<div class="sidebar-wrapper" data-simplebar="true">
+	<div class="sidebar-header">
+		<div class="">
+			<img src="~/images/adminpanel/logo-icon.png" class="logo-icon-2" alt="" />
+		</div>
+		<div>
+			<h4 class="logo-text">Syntrans</h4>
+		</div>
+		<a href="javascript:;" class="toggle-btn ml-auto"> <i class="bx bx-menu"></i>
+		</a>
+	</div>
+	<ul class="metismenu" id="menu">
+		<li>
+			<a href="javascript:;" class="has-arrow">
+				<div class="parent-icon"><i class="bx bx-home-alt"></i>
+				</div>
+                <div class="menu-title">Приборная панель</div>
+			</a>
+			<ul>
+				<li>
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Analytics">
+                        <i class="bx bx-right-arrow-alt"></i>Аналитика
+                    </a>
+				</li>
+			</ul>
+		</li>
+        <li class="menu-label">
+            База данных
+        </li>
+		<li>
+			<a asp-area="Admin" asp-controller="" asp-action="">
+				<div class="parent-icon">
+					<i class="bx bx-list-ul"></i>
+				</div>
+                <div class="menu-title">Категории услуг</div>
+			</a>
+		</li>
+		<li>
+			<a asp-area="Admin" asp-controller="" asp-action="">
+				<div class="parent-icon">
+					<i class="bx bx-cog"></i>
+				</div>
+                <div class="menu-title">Производство и услуги</div>
+			</a>
+		</li>
+		<li>
+			<a asp-area="Admin" asp-controller="" asp-action="">
+				<div class="parent-icon">
+					<i class="bx bx-news"></i>
+				</div>
+                <div class="menu-title">Новости</div>
+			</a>
+		</li>
+		<li>
+			<a asp-area="Admin" asp-controller="" asp-action="">
+				<div class="parent-icon">
+					<i class="bx bx-images"></i>
+				</div>
+                <div class="menu-title">Галерея</div>
+			</a>
+		</li>
+	</ul>
+</div>
