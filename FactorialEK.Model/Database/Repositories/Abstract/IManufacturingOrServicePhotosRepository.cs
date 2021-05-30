@@ -19,5 +19,7 @@ namespace FactorialEK.Model.Database.Repositories.Abstract
             Guid manufacturingOrServiceId, bool track = false);
 
         void DeleteManufacturingOrServicePhotoById(Guid id);
+
+        void DeleteAllManufacturingOrServicePhotosByManufacturingOrServiceId(Guid manufacturingOrServiceId);
     }
 }

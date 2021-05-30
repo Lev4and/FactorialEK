@@ -24,20 +24,38 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
 
         public bool SaveManufacturingOrService(ManufacturingOrService entity)
         {
-            if (!ContainsManufacturingOrServiceByCategoryAndName(entity.CategoryManufacturingOrServiceId, entity.Name))
+            if(entity.Id == default)
             {
-                if (entity.Id == default)
+                if (!ContainsManufacturingOrServiceByCategoryAndName(entity.CategoryManufacturingOrServiceId, entity.Name))
                 {
                     _context.Entry(entity).State = EntityState.Added;
+                    _context.SaveChanges();
+
+                    return true;
+                }
+            }
+            else
+            {
+                var oldVersionEntity = GetManufacturingOrServiceById(entity.Id);
+
+                if(oldVersionEntity.CategoryManufacturingOrServiceId != entity.CategoryManufacturingOrServiceId || 
+                    oldVersionEntity.Name != entity.Name)
+                {
+                    if (!ContainsManufacturingOrServiceByCategoryAndName(entity.CategoryManufacturingOrServiceId, entity.Name))
+                    {
+                        _context.Entry(entity).State = EntityState.Modified;
+                        _context.SaveChanges();
+
+                        return true;
+                    }
                 }
                 else
                 {
                     _context.Entry(entity).State = EntityState.Modified;
+                    _context.SaveChanges();
+
+                    return true;
                 }
-
-                _context.SaveChanges();
-
-                return true;
             }
 
             return false;
@@ -62,13 +80,45 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
         {
             if (track)
             {
-                return _context.ManufacturingOrServices.SingleOrDefault(manufacturingOrService =>
-                    manufacturingOrService.Id == id);
+                return _context.ManufacturingOrServices
+                    .Include(manufacturingOrService => manufacturingOrService.Price)
+                    .Include(manufacturingOrService => manufacturingOrService.Photos)
+                    .Include(manufacturingOrService => manufacturingOrService.Category)
+                    .Include(manufacturingOrService => manufacturingOrService.MainPhoto)
+                    .Include(manufacturingOrService => manufacturingOrService.Information)
+                    .SingleOrDefault(manufacturingOrService => manufacturingOrService.Id == id);
             }
             else
             {
-                return _context.ManufacturingOrServices.AsNoTracking().SingleOrDefault(manufacturingOrService =>
-                    manufacturingOrService.Id == id);
+                return _context.ManufacturingOrServices
+                    .Include(manufacturingOrService => manufacturingOrService.Price)
+                    .Include(manufacturingOrService => manufacturingOrService.Photos)
+                    .Include(manufacturingOrService => manufacturingOrService.Category)
+                    .Include(manufacturingOrService => manufacturingOrService.MainPhoto)
+                    .Include(manufacturingOrService => manufacturingOrService.Information)
+                    .AsNoTracking().SingleOrDefault(manufacturingOrService => manufacturingOrService.Id == id);
+            }
+        }
+
+        public IQueryable<ManufacturingOrService> GetManufacturingOrServices(bool track = false)
+        {
+            if (track)
+            {
+                return _context.ManufacturingOrServices
+                    .Include(manufacturingOrService => manufacturingOrService.Price)
+                    .Include(manufacturingOrService => manufacturingOrService.Photos)
+                    .Include(manufacturingOrService => manufacturingOrService.Category)
+                    .Include(manufacturingOrService => manufacturingOrService.MainPhoto)
+                    .Include(manufacturingOrService => manufacturingOrService.Information);
+            }
+            else
+            {
+                return _context.ManufacturingOrServices
+                    .Include(manufacturingOrService => manufacturingOrService.Price)
+                    .Include(manufacturingOrService => manufacturingOrService.Photos)
+                    .Include(manufacturingOrService => manufacturingOrService.Category)
+                    .Include(manufacturingOrService => manufacturingOrService.MainPhoto)
+                    .Include(manufacturingOrService => manufacturingOrService.Information);
             }
         }
 

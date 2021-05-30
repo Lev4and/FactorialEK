@@ -2,11 +2,11 @@
 using FactorialEK.AspNetCore.Service;
 using FactorialEK.Model.Database;
 using FactorialEK.Model.Database.Entities;
+using FactorialEK.Model.Transliteration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,15 +37,7 @@ namespace FactorialEK.AspNetCore.Areas.Admin.Controllers
 
         public IActionResult Save()
         {
-            var viewModel = new CategoryViewModel()
-            {
-                Name = "",
-                PhotoUrl = "",
-                Description = "",
-                CategoryId = default,
-            };
-
-            return View(viewModel);
+            return View(new CategoryViewModel());
         }
 
         [Route("~/Admin/Categories/Save/{id}")]
@@ -78,9 +70,9 @@ namespace FactorialEK.AspNetCore.Areas.Admin.Controllers
 
                 if(uploadedFile != null)
                 {
-                    if(await _uploadFileService.UploadFileAsync(uploadedFile, "images/upload/categories/"))
+                    if(await _uploadFileService.UploadFileAsync(uploadedFile, $"images/upload/categories/{categoty.Name.Unidecode()}"))
                     {
-                        phoroUrl = $"images/upload/categories/{uploadedFile.FileName}";
+                        phoroUrl = $"images/upload/categories/{categoty.Name.Unidecode()}/{uploadedFile.FileName}";
                     }
                 }
 

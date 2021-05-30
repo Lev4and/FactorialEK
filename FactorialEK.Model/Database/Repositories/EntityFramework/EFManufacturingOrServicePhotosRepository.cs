@@ -94,5 +94,13 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
             _context.ManufacturingOrServicePhotos.Remove(GetManufacturingOrServicePhotoById(id));
             _context.SaveChanges();
         }
+
+        public void DeleteAllManufacturingOrServicePhotosByManufacturingOrServiceId(Guid manufacturingOrServiceId)
+        {
+            var photos = GetManufacturingOrServicePhotosByManufacturingOrServiceId(manufacturingOrServiceId);
+
+            _context.ManufacturingOrServicePhotos.RemoveRange(photos.ToArray());
+            _context.SaveChanges();
+        }
     }
 }

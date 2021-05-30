@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -20,7 +21,12 @@ namespace FactorialEK.AspNetCore.Service
             {
                 if (!string.IsNullOrEmpty(uploadedFile.FileName))
                 {
-                    savePath += uploadedFile.FileName;
+                    if (!Directory.Exists($"{_appEnvironment.WebRootPath}/{savePath}"))
+                    {
+                        Directory.CreateDirectory($"{_appEnvironment.WebRootPath}/{savePath}");
+                    }
+
+                    savePath += "/" + uploadedFile.FileName;
 
                     if (!File.Exists(_appEnvironment.WebRootPath + "/" + savePath))
                     {
@@ -36,6 +42,37 @@ namespace FactorialEK.AspNetCore.Service
                         return true;
                     }
                 }
+            }
+
+            return false;
+        }
+
+        public async Task<bool> UploadFilesAsync(List<IFormFile> uploadedFiles, string savePath)
+        {
+            if(uploadedFiles != null)
+            {
+                foreach(var file in uploadedFiles)
+                {
+                    if (!string.IsNullOrEmpty(file.FileName))
+                    {
+                        var path = savePath + "/" + file.FileName;
+
+                        if (!Directory.Exists($"{_appEnvironment.WebRootPath}/{savePath}"))
+                        {
+                            Directory.CreateDirectory($"{_appEnvironment.WebRootPath}/{savePath}");
+                        }
+
+                        if (!File.Exists(_appEnvironment.WebRootPath + "/" + path))
+                        {
+                            using (var fileStream = new FileStream(_appEnvironment.WebRootPath + "/" + path, FileMode.Create))
+                            {
+                                await file.CopyToAsync(fileStream);
+                            }
+                        }
+                    }
+                }
+
+                return true;
             }
 
             return false;
