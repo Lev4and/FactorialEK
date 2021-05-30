@@ -14,6 +14,8 @@ namespace FactorialEK.Model.Database.Repositories.Abstract
 
         GalleryPhoto GetGalleryPhotoByUrl(string url, bool track = false);
 
+        IQueryable<GalleryPhoto> GetGalleryPhotos(bool track = false);
+
         IQueryable<GalleryPhoto> GetGalleryPhotos(int itemsPerPage, int numberPage, bool track = false);
 
         void DeleteGalleryPhotoById(Guid id);

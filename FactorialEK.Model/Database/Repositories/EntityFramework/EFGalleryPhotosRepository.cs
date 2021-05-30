@@ -82,6 +82,18 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
             }
         }
 
+        public IQueryable<GalleryPhoto> GetGalleryPhotos(bool track = false)
+        {
+            if (track)
+            {
+                return _context.GalleryPhotos;
+            }
+            else
+            {
+                return _context.GalleryPhotos.AsNoTracking();
+            }
+        }
+
         public IQueryable<GalleryPhoto> GetGalleryPhotos(int itemsPerPage, int numberPage,bool track = false)
         {
             if (track)
