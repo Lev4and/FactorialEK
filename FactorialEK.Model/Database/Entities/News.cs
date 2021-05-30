@@ -15,8 +15,6 @@ namespace FactorialEK.Model.Database.Entities
         [Required]
         public string Description { get; set; }
         
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue("getutcdate()")]
         public DateTime CreatedAt  { get; set; }
     }
 }

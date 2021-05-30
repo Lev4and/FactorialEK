@@ -43,19 +43,31 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
             }
         }
 
+        public IQueryable<News> GetNews(bool track = false)
+        {
+            if (track)
+            {
+                return _context.News;
+            }
+            else
+            {
+                return _context.News.AsNoTracking();
+            }
+        }
+
         public IQueryable<News> GetNews(int itemsPerPage, int numberPage, bool track = false)
         {
             if (track)
             {
                 return _context.News
-                    .OrderBy(news => news.Id)
+                    .OrderByDescending(news => news.CreatedAt)
                     .Skip((numberPage -  1) * itemsPerPage)
                     .Take(itemsPerPage);
             }
             else
             {
                 return _context.News
-                    .OrderBy(news => news.Id)
+                    .OrderByDescending(news => news.CreatedAt)
                     .Skip((numberPage -  1) * itemsPerPage)
                     .Take(itemsPerPage)
                     .AsNoTracking();
