@@ -112,16 +112,17 @@ namespace FactorialEK.AspNetCore.Areas.Admin.Controllers
 
         private void SaveManufacturingOrServicePhotos(Guid manufacturingOrServiceId, ICollection<ManufacturingOrServicePhoto> photos)
         {
+            if (manufacturingOrServiceId != default)
+            {
+                _dataManager.ManufacturingOrServicePhotos
+                    .DeleteAllManufacturingOrServicePhotosByManufacturingOrServiceId(manufacturingOrServiceId);
+            }
+
             if (photos != null)
             {
-                if (manufacturingOrServiceId != default)
-                {
-                    _dataManager.ManufacturingOrServicePhotos
-                        .DeleteAllManufacturingOrServicePhotosByManufacturingOrServiceId(manufacturingOrServiceId);
-                }
-
                 foreach (var photo in photos)
                 {
+                    photo.Id = default;
                     photo.ManufacturingOrServiceId = manufacturingOrServiceId;
 
                     _dataManager.ManufacturingOrServicePhotos.SaveManufacturingOrServicePhoto(photo);

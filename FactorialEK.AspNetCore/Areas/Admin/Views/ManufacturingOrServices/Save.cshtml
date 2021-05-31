@@ -170,9 +170,9 @@
                                                                 <a>
                                                                     <button class="btn btn-sm btn-default" onclick="onClickRemovePhoto(this);">
                                                                         <span class="fa fa-trash">
-                                                                            <input type="hidden" name="ManufacturingOrService.Photos[@i].Id" value="@Model.ManufacturingOrService.Photos.ElementAt(i).Id" />
-                                                                            <input type="hidden" name="ManufacturingOrService.Photos[@i].ManufacturingOrServiceId" value="@Model.ManufacturingOrService.Photos.ElementAt(i).ManufacturingOrServiceId" />
-                                                                            <input type="hidden" name="ManufacturingOrService.Photos[@i].Url" value="@Model.ManufacturingOrService.Photos.ElementAt(i).Url" />
+                                                                            <input type="hidden" data-photos-index="@i" name="ManufacturingOrService.Photos[@i].Id" value="@Model.ManufacturingOrService.Photos.ElementAt(i).Id" />
+                                                                            <input type="hidden" data-photos-index="@i" name="ManufacturingOrService.Photos[@i].ManufacturingOrServiceId" value="@Model.ManufacturingOrService.Photos.ElementAt(i).ManufacturingOrServiceId" />
+                                                                            <input type="hidden" data-photos-index="@i" name="ManufacturingOrService.Photos[@i].Url" value="@Model.ManufacturingOrService.Photos.ElementAt(i).Url" />
                                                                         </span>
                                                                     </button>
                                                                 </a>
@@ -261,20 +261,15 @@
     <script type="text/javascript">
         function onClickRemovePhoto(element) {
             $($($($(element).parent()).parent()).parent()).remove();
-
-            //let elements = $('.fa fa-trash');
-
-            //console.log(elements.lenght);
-
-            //for (let i = 0; i < elements.lenght; i++) {
-            //    let inputs = $(elements[i]).children('input[type=hidden]');
-
-            //    for (let j = 0; j < inputs.lenght; j++) {
-            //        console.log("Было: " + $(inputs[j]).attr('name') + " Стало: " + $(inputs[j]).attr('name').replace(new RegExp("[0-9]", "g"), i));
-
-            //        $(inputs[j]).attr('name', $(inputs[j]).attr('name').replace(new RegExp("[0-9]", "g"), i))
-            //    }
-            //}
+            
+            let table = $('#table-photos');
+            let tbody = $(table).children('tbody');
+            $(tbody).find('tr').each(function (i, trow) {
+                $(trow).find('input[type=hidden]').each(function (j, input) {
+                    $(input).attr('data-photos-index', i);
+                    $(input).attr('name', $(input).attr('name').replace(new RegExp("[0-9]", "g"), i));
+                });
+            });
         }
     </script>
 }
