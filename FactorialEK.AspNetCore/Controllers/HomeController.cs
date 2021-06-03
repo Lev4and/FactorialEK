@@ -10,7 +10,7 @@ namespace FactorialEK.AspNetCore.Controllers
             {
                 if (User.IsInRole("Администратор"))
                 {
-                    return Redirect("~/Admin/Home");
+                    return Redirect("~/Admin/Home/Index");
                 }
             }
 
