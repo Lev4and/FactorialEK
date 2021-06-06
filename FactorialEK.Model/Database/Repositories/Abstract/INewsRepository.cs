@@ -8,6 +8,8 @@ namespace FactorialEK.Model.Database.Repositories.Abstract
     {
         bool SaveNews(News entity);
 
+        int GetCountNews();
+
         News GetNewsById(Guid id, bool track = false);
 
         IQueryable<News> GetNews(bool track = false);

@@ -4,23 +4,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,600,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,500,600,700">
 }
-<section class="page-title-area" data-bg-img="../images/main/photos/bg-page-title.webp">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="page-title-content text-center">
-                    <h2 class="title text-white">Аккаунт</h2>
-                    <div class="bread-crumbs">
-                        <a asp-controller="Home" asp-action="Index">Домой
-                            <span class="breadcrumb-sep">/</span>
-                        </a>
-                        <span class="active">Аккаунт</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@{ 
+    ViewData["Title"] = "Вход";
+}
 <section class="account-login-area">
    <div class="container">
       <div class="row">
@@ -55,14 +41,8 @@
                               </div>
                            </div>
                            <div class="col-md-12">
-                              <div class="form-group mb-0 form-group-info">
+                              <div class="form-group mb-0 form-group-info text-center">
                                  <button class="btn btn-theme" type="submit">ВОЙТИ</button>
-                                 <a class="btn-forgot" href="#">Забыли свой пароль?</a>
-                              </div>
-                           </div>
-                           <div class="col-md-12">
-                              <div class="form-group mb-0">
-                                 <a class="btn-create" href="#">Создать учетную запись?</a>
                               </div>
                            </div>
                         </div>

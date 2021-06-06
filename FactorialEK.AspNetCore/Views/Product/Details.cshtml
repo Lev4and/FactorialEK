@@ -1,0 +1,119 @@
+﻿@model ManufacturingOrService
+@{
+    ViewData["Title"] = "Детали производста или услуги";
+}
+<section class="product-area shop-single-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="single-product-slider">
+                    <div class="single-product-thumb">
+                        <div class="swiper-container single-product-thumb-slider">
+                            <div class="swiper-wrapper">
+                                @if (Model.MainPhoto != null)
+                                {
+                                    <div style="width: 100%; height: 300px" class="swiper-slide zoom zoom-hover">
+                                        <div style="width: 100%; height: 100%" class="thumb-item">
+                                            <a style="width: 100%; height: 100%; display: flex; border: 1px solid black;" class="lightbox-image" data-fancybox="gallery" href="~/@Model.MainPhoto.Url">
+                                                <img style="margin: auto; max-width: 100%; max-height: 100%; object-fit: cover;" src="~/@Model.MainPhoto.Url">
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                                @foreach (var photo in Model.Photos)
+                                {
+                                    <div style="width: 100%; height: 300px" class="swiper-slide zoom zoom-hover">
+                                        <div style="width: 100%; height: 100%" class="thumb-item">
+                                            <a style="width: 100%; height: 100%; display: flex; border: 1px solid black;" class="lightbox-image" data-fancybox="gallery" href="~/@photo.Url">
+                                                <img style="margin: auto; max-width: 100%; max-height: 100%; object-fit: cover;" src="~/@photo.Url">
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-product-nav">
+                        <div class="swiper-container single-product-nav-slider">
+                            <div class="swiper-wrapper">
+                                @if (Model.MainPhoto != null)
+                                {
+                                    <div style="width: 100%; height: 80px" class="swiper-slide">
+                                        <div style="width: 100%; height: 100%; display: flex; border: 1px solid black;" class="nav-item">
+                                            <img src="~/@Model.MainPhoto.Url">
+                                        </div>
+                                    </div>
+                                }
+                                @foreach (var photo in Model.Photos)
+                                {
+                                    <div style="width: 100%; height: 80px" class="swiper-slide">
+                                        <div style="width: 100%; height: 100%; display: flex; border: 1px solid black;" class="nav-item">
+                                            <img style="margin: auto; max-width: 100%; max-height: 100%; object-fit: cover;" src="~/@photo.Url">
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="single-product-info product-info-affiliate">
+                    <h4 class="title">@Model.Name</h4>
+                    <div class="prices">
+                        <span class="price">@Model.Price.GetFormattedPrice()</span>
+                    </div>
+                    <p class="product-desc">@Html.Raw(Model.Information.ShortDescription)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="product-area product-description-review-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product-description-review">
+                    <ul class="nav nav-tabs product-description-tab-menu" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="product-description-tab" data-bs-toggle="tab" data-bs-target="#productDescription" type="button" role="tab" aria-controls="productDescription" aria-selected="true">Описание</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="product-specifications-tab" data-bs-toggle="tab" data-bs-target="#productSpecifications" type="button" role="tab" aria-controls="productSpecifications" aria-selected="false">Технические характеристики</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="product-advantages-tab" data-bs-toggle="tab" data-bs-target="#productAdvantages" type="button" role="tab" aria-controls="commentAdvantages" aria-selected="false">Преимущества</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="product-description-of-value-formation-tab" data-bs-toggle="tab" data-bs-target="#productDescriptionOfValueFormation" type="button" role="tab" aria-controls="productDescriptionOfValueFormation" aria-selected="false">Формирование стоимости</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content product-description-tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="productDescription" role="tabpanel" aria-labelledby="product-desc-tab">
+                            <div class="product-desc">
+                                @Html.Raw(Model.Information.Description)
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="productSpecifications" role="tabpanel" aria-labelledby="product-specifications-tab">
+                            <div class="product-desc">
+                                @Html.Raw(Model.Information.Specifications)
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="productAdvantages" role="tabpanel" aria-labelledby="product-advantages-tab">
+                            <div class="product-desc">
+                                @Html.Raw(Model.Information.Advantages)
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="productDescriptionOfValueFormation" role="tabpanel" aria-labelledby="product-description-of-value-formation-tab">
+                            <div class="product-desc">
+                                @Html.Raw(Model.Information.DescriptionOfValueFormation)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -3,6 +3,9 @@
 {
     <link rel="stylesheet" href="~/css/adminpanel/custom.css" />
 }
+@{
+    ViewData["Title"] = "Сохранение новости";
+}
 <div class="page-wrapper">
     <div class="page-content-wrapper">
         <div class="page-content">
@@ -39,7 +42,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Описание</label>
                                 <div class="col-sm-10">
-                                    <textarea id="mytextarea" asp-for="Description"></textarea>
+                                    <textarea id="description-text-area" asp-for="Description"></textarea>
                                     <span class="invalid-feedback" asp-validation-for="Description"></span>
                                 </div>
                             </div>
@@ -57,10 +60,10 @@
     </div>
 </div>
 @section ScriptPage {
-    <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+    <script src="~/plugins/ckeditor/ckeditor.js" asp-append-version="true"></script>
     <script>
-        tinymce.init({
-            selector: '#mytextarea'
+        CKEDITOR.replace("Description", {
+            height: 400
         });
     </script>
 }

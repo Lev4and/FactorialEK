@@ -12,7 +12,9 @@ namespace FactorialEK.Model.Database.Entities
         
         [Required]
         public string Name { get; set; }
-        
+
+        public DateTime AddedAt { get; set; }
+
         public ManufacturingOrServiceMainPhoto MainPhoto { get; set; }
         
         public CategoryManufacturingOrService Category { get; set; }

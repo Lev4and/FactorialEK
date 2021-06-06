@@ -159,7 +159,8 @@ namespace FactorialEK.AspNetCore.Areas.Admin.Controllers
                     Information = new ManufacturingOrServiceInformation(),
                     MainPhoto = new ManufacturingOrServiceMainPhoto(),
                     Photos = new List<ManufacturingOrServicePhoto>(),
-                    Category = new CategoryManufacturingOrService()
+                    Category = new CategoryManufacturingOrService(),
+                    AddedAt = DateTime.Now
                 },
                 Categories = _dataManager.CategoriesManufacturingOrService.GetCategoriesManufacturingOrService().ToList()
             });

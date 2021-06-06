@@ -8,6 +8,9 @@
     <link rel="stylesheet" type="text/css" href="~/plugins/Drag-And-Drop/dist/imageuploadify.min.css" asp-append-version="true" />
     <link rel="stylesheet" type="text/css" href="~/css/adminpanel/custom.css" asp-append-version="true" />
 }
+@{
+    ViewData["Title"] = "Сохранение производства или услуги";
+}
 <div class="page-wrapper">
     <div class="page-content-wrapper">
         <div class="page-content">
@@ -103,31 +106,31 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Краткое описание</label>
                                 <div class="col-sm-10">
-                                    <textarea id="shortdescriptiontextarea" asp-for="ManufacturingOrService.Information.ShortDescription"></textarea>
+                                    <textarea id="short-description-text-area" asp-for="ManufacturingOrService.Information.ShortDescription"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Описание</label>
                                 <div class="col-sm-10">
-                                    <textarea id="descriptiontextarea" asp-for="ManufacturingOrService.Information.Description"></textarea>
+                                    <textarea id="description-text-area" asp-for="ManufacturingOrService.Information.Description"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Технические характеристики</label>
                                 <div class="col-sm-10">
-                                    <textarea id="specificationstextarea" asp-for="ManufacturingOrService.Information.Specifications"></textarea>
+                                    <textarea id="specifications-text-area" asp-for="ManufacturingOrService.Information.Specifications"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Преимущества</label>
                                 <div class="col-sm-10">
-                                    <textarea id="advantagestextarea" asp-for="ManufacturingOrService.Information.Advantages"></textarea>
+                                    <textarea id="advantages-text-area" asp-for="ManufacturingOrService.Information.Advantages"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Подробности стоимости</label>
                                 <div class="col-sm-10">
-                                    <textarea id="descriptionofvalueformationtextarea" asp-for="ManufacturingOrService.Information.DescriptionOfValueFormation"></textarea>
+                                    <textarea id="description-of-value-formation-text-area" asp-for="ManufacturingOrService.Information.DescriptionOfValueFormation"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -228,22 +231,22 @@
             $('#table-photos').DataTable();
         });
     </script>
-    <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+    <script src="~/plugins/ckeditor/ckeditor.js" asp-append-version="true"></script>
     <script>
-        tinymce.init({
-            selector: '#shortdescriptiontextarea'
+        CKEDITOR.replace("ManufacturingOrService.Information.ShortDescription", {
+            height: 400
         });
-        tinymce.init({
-            selector: '#descriptiontextarea'
+        CKEDITOR.replace("ManufacturingOrService.Information.Description", {
+            height: 400
         });
-        tinymce.init({
-            selector: '#specificationstextarea'
+        CKEDITOR.replace("ManufacturingOrService.Information.Specifications", {
+            height: 400
         });
-        tinymce.init({
-            selector: '#advantagestextarea'
+        CKEDITOR.replace("ManufacturingOrService.Information.Advantages", {
+            height: 400
         });
-        tinymce.init({
-            selector: '#descriptionofvalueformationtextarea'
+        CKEDITOR.replace("ManufacturingOrService.Information.DescriptionOfValueFormation", {
+            height: 400
         });
     </script>
     <script src="~/js/adminpanel/bs-custom-file-input.min.js"></script>
@@ -261,7 +264,7 @@
     <script type="text/javascript">
         function onClickRemovePhoto(element) {
             $($($($(element).parent()).parent()).parent()).remove();
-            
+
             let table = $('#table-photos');
             let tbody = $(table).children('tbody');
             $(tbody).find('tr').each(function (i, trow) {

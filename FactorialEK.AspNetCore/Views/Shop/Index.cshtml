@@ -1,0 +1,115 @@
+﻿@model ShopViewModel
+@{
+    ViewData["Title"] = "Производство или услуги";
+}
+<section class="product-area product-grid-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="shop-topbar-wrapper">
+                            <div class="collection-shorting">
+                                <div class="shop-topbar-left">
+                                    <div class="view-mode">
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <button class="nav-link" id="nav-grid-tab" data-bs-toggle="tab" data-bs-target="#nav-grid" type="button" role="tab" aria-controls="nav-grid" aria-selected="false"><i class="fa fa-th"></i></button>
+                                                <button class="nav-link active" id="nav-list-tab" data-bs-toggle="tab" data-bs-target="#nav-list" type="button" role="tab" aria-controls="nav-list" aria-selected="true"><i class="fa fa-list-ul"></i></button>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                    <p>@Model.GetFormattedStringRange()</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+                        <div class="row">
+                            @foreach (var manufacturingOrService in Model.ManufacturingOrServices)
+                            {
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="product-item">
+                                        <div class="product-thumb">
+                                            <a asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@manufacturingOrService.Id">
+                                                <img src="~/@(manufacturingOrService.MainPhoto != null ? manufacturingOrService.MainPhoto.Url : "")">
+                                            </a>
+                                            <div class="product-action">
+                                                <a class="action-quick-view" asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@manufacturingOrService.Id" title="Quick View">
+                                                    <i class="ion-ios-search-strong"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <h4 class="title"><a href="shop-single-product.html">@manufacturingOrService.Name</a></h4>
+                                            <div class="prices">
+                                                <span class="price">@manufacturingOrService.Price.GetFormattedPrice()</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show active" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
+                        <div class="row">
+                            @foreach (var manufacturingOrService in Model.ManufacturingOrServices)
+                            {
+                                <div class="col-12">
+                                    <div class="product-item product-item-list">
+                                        <div class="product-thumb">
+                                            <a asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@manufacturingOrService.Id">
+                                                <img src="~/@(manufacturingOrService.MainPhoto != null ? manufacturingOrService.MainPhoto.Url : "")">
+                                            </a>
+                                        </div>
+                                        <div class="product-info">
+                                            <h4 class="title"><a href="shop-single-product.html">@manufacturingOrService.Name</a></h4>
+                                            <div class="prices">
+                                                <span class="price">@manufacturingOrService.Price.GetFormattedPrice()</span>
+                                            </div>
+                                            <div class="product-short-description">@(manufacturingOrService.Information != null ? Html.Raw(manufacturingOrService.Information.ShortDescription) : Html.Raw("Краткое описание отсутствует"))</div>
+                                            <div class="product-action">
+                                                <a class="action-quick-view" asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@manufacturingOrService.Id" title="Quick View">
+                                                    <i class="ion-ios-search-strong"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="pagination-area">
+                    <nav>
+                        <ul class="page-numbers">
+                            <li>
+                                <a class="page-number @(Model.NumberPage == 1 ? "disabled" : "") next" asp-area="" asp-controller="Shop" asp-action="PrevPage" asp-route-categoryId="@Model.CategoryId" asp-route-currentPage="@Model.NumberPage">
+                                    <i class="ion-ios-arrow-left"></i>
+                                    Предыдущая
+                                </a>
+                            </li>
+                            @foreach (var pagination in Model.Pagination)
+                            {
+                                <li>
+                                    <a class="page-number @(Model.NumberPage == pagination ? "active" : "")" asp-area="" asp-controller="Shop" asp-action="Index" asp-route-categoryId="@Model.CategoryId" asp-route-page="@pagination">@pagination</a>
+                                </li>
+                            }
+                            <li>
+                                <a class="page-number @(Model.NumberPage == (Model.CountItems % Model.ItemsPerPage != 0 ? (Model.CountItems / Model.ItemsPerPage) + 1 : Model.CountItems / Model.ItemsPerPage) ? "disabled" : "") next" asp-area="" asp-controller="Shop" asp-action="NextPage" asp-route-categoryId="@Model.CategoryId" asp-route-currentPage="@Model.NumberPage" asp-route-itemsPerPage="@Model.ItemsPerPage" asp-route-countItems="@Model.CountItems">
+                                    Следующая
+                                    <i class="ion-ios-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="total-pages">
+                        <p>@Model.GetFormattedStringRange()</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

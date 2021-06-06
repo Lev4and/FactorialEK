@@ -1,0 +1,33 @@
+﻿@model List<FactorialEK.Model.Database.Entities.News>
+<section class="blog-area blog-default-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-6 m-auto" data-aos="fade-up" data-aos-duration="1000">
+                <div class="section-title text-center">
+                    <h2 class="title">Последние новости</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row" data-aos="fade-up" data-aos-duration="1000">
+            @foreach (var news in Model)
+            {
+                <div class="col-md-6">
+                    <div class="post-item mb-md-150 mb-sm-30">
+                        <div class="content">
+                            <div class="inner-content">
+                                <h4 class="title">
+                                    <a asp-area="" asp-controller="Blog" asp-action="Details" asp-route-id="@news.Id">@news.Title</a>
+                                </h4>
+                                <div class="meta">
+                                    <a class="post-date" href="blog.html">@news.CreatedAt.ToLongDateString()</a>
+                                </div>
+                                <div style="height: 80px; overflow: hidden; margin-bottom: 10px;">@Html.Raw(news.Description)</div>
+                                <a class="btn-blog" asp-area="" asp-controller="Blog" asp-action="Details" asp-route-id="@news.Id">Читать далее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

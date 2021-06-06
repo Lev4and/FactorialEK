@@ -82,6 +82,9 @@ namespace FactorialEK.Model.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("AddedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("CategoryManufacturingOrServiceId")
                         .HasColumnType("uniqueidentifier");
 
@@ -254,7 +257,7 @@ namespace FactorialEK.Model.Database.Migrations
                         new
                         {
                             Id = "B867520A-92DB-4658-BE39-84DA53A601C0",
-                            ConcurrencyStamp = "2f6e580c-bb95-458f-9fb2-fe55e2eaf20b",
+                            ConcurrencyStamp = "42591ac0-4b62-4a79-a89e-aa7b6f349725",
                             Name = "Администратор",
                             NormalizedName = "АДМИНИСТРАТОР"
                         });
@@ -353,13 +356,13 @@ namespace FactorialEK.Model.Database.Migrations
                         {
                             Id = "21F7B496-C675-4E8A-A34C-FC5EC0762FDB",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3ee33bd0-ade9-4d93-97a5-187ee6df674e",
+                            ConcurrencyStamp = "933a6263-a3b0-4af2-a43f-a3fc3e9be520",
                             Email = "egor.yaremenko.1998@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EGOR.YAREMENKO.1998@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBSACdIGOzJO3cUviMOLhBMX57b2QiGxMruSXCDTxUcxh8fXLQSTYYH8YSmZgeyMNQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPO75Z6PfUGznUJPujDXXjrtwDyEM1kWljTc3vFRqYOLlri/+JjSHC9tDC1KLzrgbg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

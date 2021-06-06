@@ -1,9 +1,8 @@
-﻿@await Html.PartialAsync("HeroAreaWrapperPartial")
-@await Html.PartialAsync("ProductAreaWrapperPartial")
-@await Html.PartialAsync("OfferAreaWrapperPartial")
-@await Html.PartialAsync("FeaturedProductAreaWrapperPartial")
+﻿@*@await Component.InvokeAsync("Gallery")*@
+@await Component.InvokeAsync("LatestsManufacturingOrServices")
+@await Component.InvokeAsync("FeaturedManufacturingOrServices")
 @await Html.PartialAsync("NewsletterAreaWrapperPartial")
-@await Html.PartialAsync("BlogAreaWrapperPartial")
+@await Component.InvokeAsync("LatestsNews")
 @section ScriptPage
 {
     <script>
@@ -27,4 +26,7 @@
         });
       });
     </script>
+}
+@{ 
+    ViewData["Title"] = "Главная";
 }

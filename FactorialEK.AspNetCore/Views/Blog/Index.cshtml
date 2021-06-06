@@ -1,0 +1,59 @@
+﻿@model BlogViewModel
+<section class="blog-grid-area">
+    <div class="container">
+        <div class="row flex-row-reverse">
+            <div class="col-lg-12">
+                <div class="blog-content-area post-items-style2">
+                    <div class="row">
+                        @foreach (var news in Model.News)
+                        {
+                            <div class="col-md-6 col-lg-12">
+                                <div class="post-item">
+                                    <div class="content">
+                                        <div class="inner-content">
+                                            <h4 class="title">
+                                                <a asp-area="" asp-controller="Blog" asp-action="Details" asp-route-id="@news.Id">@news.Title</a>
+                                            </h4>
+                                            <div class="meta">
+                                                <a class="post-date" href="blog.html">@news.CreatedAt.ToLongDateString()</a>
+                                            </div>
+                                            <div style="height: 80px; overflow: hidden; margin-bottom: 10px;">@Html.Raw(news.Description)</div>
+                                            <a class="btn-blog" asp-area="" asp-controller="Blog" asp-action="Details" asp-route-id="@news.Id">Читать далее</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="pagination-area">
+                        <nav>
+                            <ul class="page-numbers">
+                                <li>
+                                    <a class="page-number @(Model.NumberPage == 1 ? "disabled" : "") next" asp-area="" asp-controller="Blog" asp-action="PrevPage" asp-route-currentPage="@Model.NumberPage">
+                                        <i class="ion-ios-arrow-left"></i>
+                                        Предыдущая
+                                    </a>
+                                </li>
+                                @foreach (var pagination in Model.Pagination)
+                                {
+                                    <li>
+                                        <a class="page-number @(Model.NumberPage == pagination ? "active" : "")" asp-area="" asp-controller="Blog" asp-action="Index" asp-route-page="@pagination">@pagination</a>
+                                    </li>
+                                }
+                                <li>
+                                    <a class="page-number @(Model.NumberPage == (Model.CountItems % Model.ItemsPerPage != 0 ? (Model.CountItems / Model.ItemsPerPage) + 1 : Model.CountItems / Model.ItemsPerPage) ? "disabled" : "") next" asp-area="" asp-controller="Blog" asp-action="NextPage" asp-route-currentPage="@Model.NumberPage" asp-route-itemsPerPage="@Model.ItemsPerPage" asp-route-countItems="@Model.CountItems">
+                                        Следующая
+                                        <i class="ion-ios-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="total-pages">
+                            <p>@Model.GetFormattedStringRange()</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

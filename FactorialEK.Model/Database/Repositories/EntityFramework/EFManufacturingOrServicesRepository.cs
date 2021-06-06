@@ -118,7 +118,67 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
                     .Include(manufacturingOrService => manufacturingOrService.Photos)
                     .Include(manufacturingOrService => manufacturingOrService.Category)
                     .Include(manufacturingOrService => manufacturingOrService.MainPhoto)
-                    .Include(manufacturingOrService => manufacturingOrService.Information);
+                    .Include(manufacturingOrService => manufacturingOrService.Information)
+                    .AsNoTracking();
+            }
+        }
+
+
+        public IQueryable<ManufacturingOrService> GetLatestManufacturingOrServices(int itemsPerResult, bool track = false)
+        {
+            if (track)
+            {
+                return _context.ManufacturingOrServices
+                    .Include(manufacturingOrService => manufacturingOrService.Price)
+                    .Include(manufacturingOrService => manufacturingOrService.Photos)
+                    .Include(manufacturingOrService => manufacturingOrService.Category)
+                    .Include(manufacturingOrService => manufacturingOrService.MainPhoto)
+                    .Include(manufacturingOrService => manufacturingOrService.Information)
+                    .OrderByDescending(manufacturingOrService => manufacturingOrService.AddedAt)
+                    .Take(itemsPerResult);
+            }
+            else
+            {
+                return _context.ManufacturingOrServices
+                    .Include(manufacturingOrService => manufacturingOrService.Price)
+                    .Include(manufacturingOrService => manufacturingOrService.Photos)
+                    .Include(manufacturingOrService => manufacturingOrService.Category)
+                    .Include(manufacturingOrService => manufacturingOrService.MainPhoto)
+                    .Include(manufacturingOrService => manufacturingOrService.Information)
+                    .OrderByDescending(manufacturingOrService => manufacturingOrService.AddedAt)
+                    .Take(itemsPerResult)
+                    .AsNoTracking();
+            }
+        }
+
+        public IQueryable<ManufacturingOrService> GetFeaturedManufacturingOrServices(int itemsPerResult, bool track = false)
+        {
+            if (track)
+            {
+                return _context.ManufacturingOrServices
+                    .Include(manufacturingOrService => manufacturingOrService.Price)
+                    .Include(manufacturingOrService => manufacturingOrService.Photos)
+                    .Include(manufacturingOrService => manufacturingOrService.Category)
+                    .Include(manufacturingOrService => manufacturingOrService.MainPhoto)
+                    .Include(manufacturingOrService => manufacturingOrService.Information)
+                    .OrderByDescending(manufacturingOrService => manufacturingOrService.AddedAt)
+                    .Take(itemsPerResult)
+                    .Where(manufacturingOrService => manufacturingOrService.Category.Name == "Видеодомофоны" || 
+                        manufacturingOrService.Category.Name == "Домофоны и оборудование Факториал");
+            }
+            else
+            {
+                return _context.ManufacturingOrServices
+                    .Include(manufacturingOrService => manufacturingOrService.Price)
+                    .Include(manufacturingOrService => manufacturingOrService.Photos)
+                    .Include(manufacturingOrService => manufacturingOrService.Category)
+                    .Include(manufacturingOrService => manufacturingOrService.MainPhoto)
+                    .Include(manufacturingOrService => manufacturingOrService.Information)
+                    .OrderByDescending(manufacturingOrService => manufacturingOrService.AddedAt)
+                    .Take(itemsPerResult)
+                    .Where(manufacturingOrService => manufacturingOrService.Category.Name == "Видеодомофоны" ||
+                        manufacturingOrService.Category.Name == "Домофоны и оборудование Факториал")
+                    .AsNoTracking();
             }
         }
 
@@ -140,7 +200,6 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
                         (searchString.Length > 0
                             ? EF.Functions.Like(manufacturingOrService.Name, $"%{searchString}%")
                             : true))
-                    .OrderBy(manufacturingOrService => manufacturingOrService.Id)
                     .Skip((numberPage - 1) * itemsPerPage)
                     .Take(itemsPerPage);
             }
@@ -159,7 +218,6 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
                         (searchString.Length > 0
                             ? EF.Functions.Like(manufacturingOrService.Name, $"%{searchString}%")
                             : true))
-                    .OrderBy(manufacturingOrService => manufacturingOrService.Id)
                     .Skip((numberPage - 1) * itemsPerPage)
                     .Take(itemsPerPage)
                     .AsNoTracking();

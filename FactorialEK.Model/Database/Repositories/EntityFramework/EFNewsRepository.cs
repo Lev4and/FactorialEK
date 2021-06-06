@@ -31,6 +31,11 @@ namespace FactorialEK.Model.Database.Repositories.EntityFramework
             return true;
         }
 
+        public int GetCountNews()
+        {
+            return _context.News.Count();
+        }
+
         public News GetNewsById(Guid id, bool track = false)
         {
             if (track)

@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="~/plugins/datatable/css/buttons.bootstrap4.min.css" asp-append-version="true" />
     <link rel="stylesheet" type="text/css" href="~/css/adminpanel/custom.css" asp-append-version="true" />
 }
+@{
+    ViewData["Title"] = "Производство и услуги";
+}
 <div class="page-wrapper">
     <div class="page-content-wrapper">
         <div class="page-content">
@@ -48,6 +51,7 @@
                                     <th>Наименование</th>
                                     <th>Категория производства или услуг</th>
                                     <th>Стоимость</th>
+                                    <th>Дата добавления</th>
                                     <th>Действия</th>
                                 </tr>
                             </thead>
@@ -63,6 +67,7 @@
                                         <td>@manufacturingOrService.Name</td>
                                         <td>@manufacturingOrService.Category.Name</td>
                                         <td>@(manufacturingOrService.Price != null ? manufacturingOrService.Price.GetFormattedPrice() : "Неизвестно")</td>
+                                        <th>@manufacturingOrService.AddedAt.ToString("yyyy-MM-dd HH:mm:ss")</th>
                                         <td>
                                             <div class="btn-group pull-right">
                                                 <a asp-area="Admin" asp-controller="ManufacturingOrServices" asp-action="Save" asp-route-id="@manufacturingOrService.Id">
@@ -90,6 +95,7 @@
                                     <th>Наименование</th>
                                     <th>Категория производства или услуг</th>
                                     <th>Стоимость</th>
+                                    <th>Дата добавления</th>
                                     <th>Действия</th>
                                 </tr>
                             </tfoot>

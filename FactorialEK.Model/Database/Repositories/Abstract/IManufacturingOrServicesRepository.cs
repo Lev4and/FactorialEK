@@ -16,6 +16,10 @@ namespace FactorialEK.Model.Database.Repositories.Abstract
 
         IQueryable<ManufacturingOrService> GetManufacturingOrServices(bool track = false);
 
+        IQueryable<ManufacturingOrService> GetLatestManufacturingOrServices(int itemsPerResult, bool track = false);
+
+        IQueryable<ManufacturingOrService> GetFeaturedManufacturingOrServices(int itemsPerResult, bool track = false);
+
         IQueryable<ManufacturingOrService> GetManufacturingOrServices(Guid? categoryId, string searchString, int itemsPerPage, int numberPage,
             bool track = false);
 

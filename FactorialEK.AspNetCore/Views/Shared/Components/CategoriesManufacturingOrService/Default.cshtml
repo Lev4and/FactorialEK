@@ -1,0 +1,12 @@
+﻿@model List<CategoryManufacturingOrService>
+<li class="has-submenu">
+    <a asp-controller="Home" asp-action="Index">Производство и услуги</a>
+    <ul class="submenu-nav">
+        @foreach (var category in Model)
+        {
+            <li>
+                <a asp-area="" asp-controller="Shop" asp-action="Index" asp-route-categoryId="@category.Id">@category.Name</a>
+            </li>
+        }
+    </ul>
+</li>

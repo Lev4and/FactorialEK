@@ -1,0 +1,37 @@
+﻿@model List<ManufacturingOrService>
+<section class="product-area featured-product-area" data-aos="fade-up" data-aos-duration="1000">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-6 m-auto">
+                <div class="section-title text-center">
+                    <h2 class="title">Рекомендуемое производство и услуги</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var manufacturingOrService in Model)
+            {
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="product-item">
+                        <div class="product-thumb">
+                            <a asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@manufacturingOrService.Id">
+                                <img src="~/@(manufacturingOrService.MainPhoto != null ? manufacturingOrService.MainPhoto.Url : "")" alt="Alan-Shop">
+                            </a>
+                            <div class="product-action">
+                                <a class="action-quick-view" asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@manufacturingOrService.Id" title="Quick View">
+                                    <i class="ion-ios-search-strong"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="title"><a href="shop-single-product.html">@manufacturingOrService.Name</a></h4>
+                            <div class="prices">
+                                <span class="price">@manufacturingOrService.Price.GetFormattedPrice()</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
