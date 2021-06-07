@@ -1723,4 +1723,5 @@
     <None Include="wwwroot\plugins\ckeditor\skins\moono-lisa\readme.md" />
     <None Include="wwwroot\plugins\ckeditor\styles.js" />
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>
